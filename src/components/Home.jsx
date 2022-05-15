@@ -3,6 +3,7 @@ import { ethers } from "ethers";
 import MyNFT from '../artifacts/contracts/MyNFT.sol/MyNFT.json';
 import { useEffect, useState } from "react";
 import NFTImage from "./NFTImage";
+import MintForm from "./MintForm";
 
 // Replace deployed contract's address here
 const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3"
@@ -31,6 +32,7 @@ export default function Home() {
   return (
     <div>
       <WalletBalance />
+      <MintForm />
       {Array(totalMinted + 1).fill(0).map((_, i) => (
         <div key={i}>
           <NFTImage tokenId={i} getCount={getCount} />
