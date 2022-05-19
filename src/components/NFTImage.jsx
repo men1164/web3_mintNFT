@@ -1,3 +1,5 @@
+// Change to display each NFT only, move all minting functions to MintForm
+
 import { useEffect, useState } from "react";
 import { ethers } from "ethers";
 import MyNFT from '../artifacts/contracts/MyNFT.sol/MyNFT.json';
@@ -20,6 +22,7 @@ export default function NFTImage({ tokenId, getCount }) {
   const metaDataURI = `${contentId}/${tokenId}.json`;
   // const imageURI = `https://gateway.pinata.cloud/ipfs/${contentId}/${tokenId}.png`;
   const imageURI = `src/img/${tokenId}.png`;
+  
   const [isMinted, setIsMinted] = useState(false);
 
   const getMintedStatus = async () => {
