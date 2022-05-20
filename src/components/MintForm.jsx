@@ -1,7 +1,20 @@
 import axios from "axios";
 import { useState } from "react"
+import { ethers } from "ethers";
+import MyNFT from '../artifacts/contracts/MyNFT.sol/MyNFT.json';
 
-export default function MintForm() {
+// Replace deployed contract's address here
+const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3"
+
+const provider = new ethers.providers.Web3Provider(window.ethereum);
+
+// get the end user
+const signer = provider.getSigner();
+
+// get the smart contract
+const contract = new ethers.Contract(contractAddress, MyNFT.abi, signer);
+
+export default function MintForm({ getCount }) {
   const [inputFile, setFile] = useState(null);
   const [nftName, setNftName] = useState('');
   const [description, setDescription] = useState('');
@@ -10,6 +23,7 @@ export default function MintForm() {
   const types = ["image/jpeg", "image/png"];
   const url = "https://api.pinata.cloud/pinning/pinFileToIPFS";
   const url2 = `https://api.pinata.cloud/pinning/hashMetadata`;
+  let uri;
 
   const fileChange = e => {
     setFile(null)
@@ -24,6 +38,17 @@ export default function MintForm() {
       // setThumbnailError('Please selected an image file (PNG or JPG)')
     }
   }
+
+  const mintToken = async () => {
+    const connection = contract.connect(signer);
+    const addr = connection.address;
+    const result = await contract.payToMint(addr, uri, {
+      value: ethers.utils.parseEther('0.05'),
+    });
+
+    await result.wait();
+    getCount();
+  };
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -43,8 +68,9 @@ export default function MintForm() {
         }
       });
       console.log(res)
+      uri = res.data.IpfsHash;
       
-      // MetaData update
+      // MetaData for NFTs update
       const metaData2 = { ipfsPinHash: res.data.IpfsHash, ...metaData, keyvalues: { description, image: `ipfs://${res.data.IpfsHash}` }};
       
       const res2 = await axios.put(url2, metaData2, {
@@ -54,6 +80,8 @@ export default function MintForm() {
         }
       });
       console.log(res2);
+      
+      mintToken();
     }
     catch(err) {
       console.log(err.message);

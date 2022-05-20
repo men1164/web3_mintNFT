@@ -52,7 +52,7 @@ export default function Home() {
   return (
     <div>
       {/* <WalletBalance /> */}
-      <MintForm />
+      <MintForm getCount={getCount} />
       {/* {Array(totalMinted + 1).fill(0).map((_, i) => (
         <div key={i}>
           <NFTImage tokenId={i} getCount={getCount} />
