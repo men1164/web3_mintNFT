@@ -9,7 +9,7 @@ export default function MintForm() {
 
   const types = ["image/jpeg", "image/png"];
   const url = "https://api.pinata.cloud/pinning/pinFileToIPFS";
-  // const url2 = `https://api.pinata.cloud/pinning/hashMetadata`;
+  const url2 = `https://api.pinata.cloud/pinning/hashMetadata`;
 
   const fileChange = e => {
     setFile(null)
@@ -45,17 +45,15 @@ export default function MintForm() {
       console.log(res)
       
       // MetaData update
-      // const formData2 = new FormData();
-      // const metaData2 = { ipfsPinHash: res.data.IpfsHash, ...metaData, keyvalues: { description, image: `ipfs://${res.data.IpfsHash}` }};
-      // formData2.append("pinataMetadata", JSON.stringify(metaData2))
+      const metaData2 = { ipfsPinHash: res.data.IpfsHash, ...metaData, keyvalues: { description, image: `ipfs://${res.data.IpfsHash}` }};
       
-      // const res2 = await axios.put(url2, formData2, {
-      //   headers: {
-      //     'pinata_api_key': '08bf105bd0843dbc2a63',
-      //     'pinata_secret_api_key': '75747fb2df258b14709aba05f906753db0a66a4c02cc82a90e0834e9cd9e6af1'
-      //   }
-      // });
-      // console.log(res2);
+      const res2 = await axios.put(url2, metaData2, {
+        headers: {
+          'pinata_api_key': '08bf105bd0843dbc2a63',
+          'pinata_secret_api_key': '75747fb2df258b14709aba05f906753db0a66a4c02cc82a90e0834e9cd9e6af1'
+        }
+      });
+      console.log(res2);
     }
     catch(err) {
       console.log(err.message);
