@@ -4,6 +4,7 @@ import MyNFT from '../artifacts/contracts/MyNFT.sol/MyNFT.json';
 import { useEffect, useState } from "react";
 import MintForm from "./MintForm";
 import NFT from "./NFT";
+import Header from "./Header";
 
 // Replace deployed contract's address here
 const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3"
@@ -30,14 +31,17 @@ export default function Home() {
   }, []);
   
   return (
-    <div className=" bg-gradient-to-tr from-black to-[#5727B0] min-h-screen">
-      <WalletBalance />
-      <MintForm getCount={getCount} />
-      {Array(totalMinted).fill(0).map((_, i) => (
-        <div key={i}>
-          <NFT tokenId={i} />
-        </div>
-      ))}
+    <div className="bg-gradient-to-tr from-black to-[#411b87] min-h-screen">
+      <div className="container p-10 min-w-full">
+        <Header />
+        <WalletBalance />
+        <MintForm getCount={getCount} />
+        {Array(totalMinted).fill(0).map((_, i) => (
+          <div key={i}>
+            <NFT tokenId={i} />
+          </div>
+        ))}
+      </div>
     </div>
   )
 }

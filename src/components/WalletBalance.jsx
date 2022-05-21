@@ -1,9 +1,9 @@
 import { ethers } from "ethers";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 export default function WalletBalance() {
-  const [balance, setBalance] = useState();
+  const [balance, setBalance] = useState(null);
 
   // This function try to get balance from Metamask account
   const getBalance = async () => {
@@ -14,10 +14,15 @@ export default function WalletBalance() {
     setBalance(ethers.utils.formatEther(balance));
   }
 
+  useEffect(() => {
+    getBalance();
+  }, []);
+
   return (
-    <div>
-      <h5>Your Balance: {balance}</h5>
-      <button onClick={() => getBalance()}>Show My Balance</button>
+    <div className="min-w-full text-center mt-3">
+      {balance && 
+        <h5 className="text-2xl text-white font-medium">Balance: {balance} ETH</h5>
+      }
     </div>
   )
 }
