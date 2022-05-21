@@ -40,8 +40,6 @@ export default function NFT({ tokenId }) {
           'pinata_secret_api_key': '75747fb2df258b14709aba05f906753db0a66a4c02cc82a90e0834e9cd9e6af1'
         }
       });
-
-      console.log(res.data.rows[0]);
       setMetaData(res.data.rows[0]);
     }
     catch(err) {
