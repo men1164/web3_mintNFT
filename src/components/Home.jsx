@@ -23,7 +23,7 @@ export default function Home() {
 
   const getCount = async () => {
     const count = await contract.count();
-    console.log(parseInt(count));
+    console.log("fire getCount");
     setTotalMinted(parseInt(count));
   }
 
@@ -57,7 +57,7 @@ export default function Home() {
       {Array(totalMinted).fill(0).map((_, i) => (
         <div key={i}>
           {/* <NFTImage tokenId={i} getCount={getCount} /> */}
-          <NFT tokenId={i} getCount={getCount} />
+          <NFT tokenId={i} />
         </div>
       ))}
     </div>
