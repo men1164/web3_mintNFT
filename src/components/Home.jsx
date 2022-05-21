@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import NFTImage from "./NFTImage";
 import MintForm from "./MintForm";
 import axios from "axios";
+import NFT from "./NFT";
 
 // Replace deployed contract's address here
 const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3"
@@ -53,11 +54,12 @@ export default function Home() {
     <div>
       {/* <WalletBalance /> */}
       <MintForm getCount={getCount} />
-      {/* {Array(totalMinted + 1).fill(0).map((_, i) => (
+      {Array(totalMinted).fill(0).map((_, i) => (
         <div key={i}>
-          <NFTImage tokenId={i} getCount={getCount} />
+          {/* <NFTImage tokenId={i} getCount={getCount} /> */}
+          <NFT tokenId={i} getCount={getCount} />
         </div>
-      ))} */}
+      ))}
     </div>
   )
 }
