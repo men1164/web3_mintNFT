@@ -14,7 +14,7 @@ const signer = provider.getSigner();
 // get the smart contract
 const contract = new ethers.Contract(contractAddress, MyNFT.abi, signer);
 
-export default function MintForm({ getCount }) {
+export default function MintForm({ getCount, getBalance }) {
   const [inputFile, setFile] = useState(null);
   const [nftName, setNftName] = useState('');
   const [description, setDescription] = useState('');
@@ -24,8 +24,8 @@ export default function MintForm({ getCount }) {
 
 
   const types = ["image/jpeg", "image/png"];
-  const url = "https://api.pinata.cloud/pinning/pinFileToIPFS";
-  const url2 = `https://api.pinata.cloud/pinning/hashMetadata`;
+  const pinUrl = "https://api.pinata.cloud/pinning/pinFileToIPFS";
+  const hashMetaUrl = `https://api.pinata.cloud/pinning/hashMetadata`;
   let cid;
 
   const fileChange = e => {
@@ -73,7 +73,7 @@ export default function MintForm({ getCount }) {
 
     try {
       setIsMinting(true);
-      const res = await axios.post(url, formData, {
+      const res = await axios.post(pinUrl, formData, {
         headers: {
           'Content-Type': `multipart/form-data; boundary=${formData._boundary}`,
           'pinata_api_key': '08bf105bd0843dbc2a63',
@@ -86,7 +86,7 @@ export default function MintForm({ getCount }) {
       // MetaData for NFTs update
       const metaData2 = { ipfsPinHash: res.data.IpfsHash, ...metaData, keyvalues: { description, image: `ipfs://${res.data.IpfsHash}` }};
       
-      const res2 = await axios.put(url2, metaData2, {
+      const res2 = await axios.put(hashMetaUrl, metaData2, {
         headers: {
           'pinata_api_key': '08bf105bd0843dbc2a63',
           'pinata_secret_api_key': '75747fb2df258b14709aba05f906753db0a66a4c02cc82a90e0834e9cd9e6af1'
@@ -97,6 +97,7 @@ export default function MintForm({ getCount }) {
       mintToken();
       setIsMinting(false);
       clearForm();
+      getBalance();
     }
     catch(err) {
       setIsMinting(false);
