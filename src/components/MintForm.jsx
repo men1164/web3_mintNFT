@@ -14,7 +14,7 @@ const signer = provider.getSigner();
 // get the smart contract
 const contract = new ethers.Contract(contractAddress, MyNFT.abi, signer);
 
-export default function MintForm({ getCount, getBalance }) {
+export default function MintForm({ getCount }) {
   const [inputFile, setFile] = useState(null);
   const [nftName, setNftName] = useState('');
   const [description, setDescription] = useState('');
@@ -97,7 +97,6 @@ export default function MintForm({ getCount, getBalance }) {
       mintToken();
       setIsMinting(false);
       clearForm();
-      getBalance();
     }
     catch(err) {
       setIsMinting(false);

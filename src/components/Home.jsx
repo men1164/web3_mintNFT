@@ -36,11 +36,17 @@ export default function Home() {
         <Header />
         <WalletBalance />
         <MintForm getCount={getCount} />
-        {Array(totalMinted).fill(0).map((_, i) => (
-          <div key={i}>
-            <NFT tokenId={i} />
-          </div>
-        ))}
+        <p className="text-white text-2xl font-semibold text-center mt-14">
+          You've already minted 
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500"> {totalMinted} artwork(s)!</span>
+        </p>
+        <div className="flex flex-wrap justify-center my-5 gap-y-8 gap-x-5 mx-auto w-full">
+          {Array(totalMinted).fill(0).map((_, i) => (
+            <div key={i}>
+              <NFT tokenId={i} />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   )
