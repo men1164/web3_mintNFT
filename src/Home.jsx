@@ -30,7 +30,7 @@ export default function Home() {
   
   return (
     <div className="container p-10 min-w-full">
-      <Header />
+      <Header message1={"Mint Your"} highlight={"NFT"} message2={"Today!"} />
       <WalletBalance />
       <MintForm getCount={getCount} />
       {totalMinted > 0 && 

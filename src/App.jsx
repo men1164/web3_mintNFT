@@ -2,6 +2,7 @@ import Home from "./Home"
 import Install from "./components/Install"
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
+import Transfer from "./Transfer";
 
 function App() {
   if(window.ethereum) {
@@ -12,7 +13,7 @@ function App() {
           <Routes>
             <Route path="/" element={ <Navigate to="/mint" />} />
             <Route path="/mint" element={ <Home /> } />
-            <Route path="/transfer" element={ <div>transfer</div> } />
+            <Route path="/transfer" element={ <Transfer /> } />
           </Routes>
         </BrowserRouter>
       </div>
