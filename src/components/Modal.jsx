@@ -1,5 +1,4 @@
 import { Dialog, Transition } from '@headlessui/react'
-import { BigNumber } from 'ethers'
 import { Fragment, useState } from 'react'
 
 export default function Modal({ tx }) {
@@ -46,8 +45,8 @@ export default function Modal({ tx }) {
                     className="text-lg font-medium leading-6 text-gray-900"
                   >
                     <p className="flex">
-                      <svg class="h-6 w-6 mr-2 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      <svg className="h-6 w-6 mr-2 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
                       Transaction successful
                     </p>
