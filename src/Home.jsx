@@ -1,13 +1,11 @@
-import WalletBalance from "./WalletBalance";
+import WalletBalance from "./components/WalletBalance";
 import { ethers } from "ethers";
-import MyNFT from '../artifacts/contracts/MyNFT.sol/MyNFT.json';
+import MyNFT from './artifacts/contracts/MyNFT.sol/MyNFT.json';
 import { useEffect, useState } from "react";
-import MintForm from "./MintForm";
-import NFT from "./NFT";
-import Header from "./Header";
+import MintForm from "./components/MintForm";
+import NFT from "./components/NFT";
+import Header from "./components/Header";
 
-// Replace deployed contract's address here
-const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3"
 
 const provider = new ethers.providers.Web3Provider(window.ethereum);
 
@@ -15,7 +13,7 @@ const provider = new ethers.providers.Web3Provider(window.ethereum);
 const signer = provider.getSigner();
 
 // get the smart contract
-const contract = new ethers.Contract(contractAddress, MyNFT.abi, signer);
+const contract = new ethers.Contract(config.CONTRACT_ADDRESS, MyNFT.abi, signer);
 
 export default function Home() {
   const [totalMinted, setTotalMinted] = useState(0);
@@ -36,10 +34,12 @@ export default function Home() {
         <Header />
         <WalletBalance />
         <MintForm getCount={getCount} />
-        <p className="text-white text-2xl font-semibold text-center mt-14">
-          You've already minted 
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500"> {totalMinted} artwork(s)!</span>
-        </p>
+        {totalMinted > 0 && 
+          <p className="text-white text-2xl font-semibold text-center mt-14">
+            You've already minted 
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500"> {totalMinted} artwork(s)!</span>
+          </p>
+        }
         <div className="flex flex-wrap justify-center my-5 gap-y-8 gap-x-5 mx-auto w-full">
           {Array(totalMinted).fill(0).map((_, i) => (
             <div key={i}>

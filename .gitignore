@@ -28,6 +28,7 @@ node_modules
 coverage
 coverage.json
 typechain
+./src/config/config.js
 
 #Hardhat files
 cache

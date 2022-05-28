@@ -3,8 +3,6 @@ import { useState } from "react"
 import { ethers } from "ethers";
 import MyNFT from '../artifacts/contracts/MyNFT.sol/MyNFT.json';
 
-// Replace deployed contract's address here
-const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3"
 
 const provider = new ethers.providers.Web3Provider(window.ethereum);
 
@@ -12,7 +10,7 @@ const provider = new ethers.providers.Web3Provider(window.ethereum);
 const signer = provider.getSigner();
 
 // get the smart contract
-const contract = new ethers.Contract(contractAddress, MyNFT.abi, signer);
+const contract = new ethers.Contract(config.CONTRACT_ADDRESS, MyNFT.abi, signer);
 
 export default function MintForm({ getCount }) {
   const [inputFile, setFile] = useState(null);
@@ -76,8 +74,8 @@ export default function MintForm({ getCount }) {
       const res = await axios.post(pinUrl, formData, {
         headers: {
           'Content-Type': `multipart/form-data; boundary=${formData._boundary}`,
-          'pinata_api_key': '08bf105bd0843dbc2a63',
-          'pinata_secret_api_key': '75747fb2df258b14709aba05f906753db0a66a4c02cc82a90e0834e9cd9e6af1'
+          'pinata_api_key': config.PINATA_API_KEY,
+          'pinata_secret_api_key': config.PINATA_API_SECRET_KEY
         }
       });
       console.log(res)
@@ -88,8 +86,8 @@ export default function MintForm({ getCount }) {
       
       const res2 = await axios.put(hashMetaUrl, metaData2, {
         headers: {
-          'pinata_api_key': '08bf105bd0843dbc2a63',
-          'pinata_secret_api_key': '75747fb2df258b14709aba05f906753db0a66a4c02cc82a90e0834e9cd9e6af1'
+          'pinata_api_key': config.PINATA_API_KEY,
+          'pinata_secret_api_key': config.PINATA_API_SECRET_KEY
         }
       });
       console.log(res2);

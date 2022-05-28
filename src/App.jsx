@@ -1,4 +1,4 @@
-import Home from "./components/Home"
+import Home from "./Home"
 import Install from "./components/Install"
 
 function App() {
