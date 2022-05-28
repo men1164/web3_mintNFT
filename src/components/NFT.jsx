@@ -10,7 +10,7 @@ const provider = new ethers.providers.Web3Provider(window.ethereum);
 const signer = provider.getSigner();
 
 // get the smart contract
-const contract = new ethers.Contract(config.CONTRACT_ADDRESS, MyNFT.abi, signer);
+const contract = new ethers.Contract(config.DEPLOYED_CONTRACT_ADDRESS, MyNFT.abi, signer);
 
 export default function NFT({ tokenId }) {
   const [uri, setUri] = useState('');
@@ -38,7 +38,7 @@ export default function NFT({ tokenId }) {
       const res = await axios.get(endPoint, {
         headers: {
           'pinata_api_key': config.PINATA_API_KEY,
-          'pinata_secret_api_key': config.pinata_secret_api_key
+          'pinata_secret_api_key': config.PINATA_SECRET_API_KEY
         }
       });
       setMetaData(res.data.rows[0]);

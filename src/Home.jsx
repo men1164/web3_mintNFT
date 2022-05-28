@@ -13,7 +13,7 @@ const provider = new ethers.providers.Web3Provider(window.ethereum);
 const signer = provider.getSigner();
 
 // get the smart contract
-const contract = new ethers.Contract(config.CONTRACT_ADDRESS, MyNFT.abi, signer);
+const contract = new ethers.Contract(config.DEPLOYED_CONTRACT_ADDRESS, MyNFT.abi, signer);
 
 export default function Home() {
   const [totalMinted, setTotalMinted] = useState(0);

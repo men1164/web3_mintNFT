@@ -10,7 +10,7 @@ const provider = new ethers.providers.Web3Provider(window.ethereum);
 const signer = provider.getSigner();
 
 // get the smart contract
-const contract = new ethers.Contract(config.CONTRACT_ADDRESS, MyNFT.abi, signer);
+const contract = new ethers.Contract(config.DEPLOYED_CONTRACT_ADDRESS, MyNFT.abi, signer);
 
 export default function MintForm({ getCount }) {
   const [inputFile, setFile] = useState(null);
@@ -75,7 +75,7 @@ export default function MintForm({ getCount }) {
         headers: {
           'Content-Type': `multipart/form-data; boundary=${formData._boundary}`,
           'pinata_api_key': config.PINATA_API_KEY,
-          'pinata_secret_api_key': config.PINATA_API_SECRET_KEY
+          'pinata_secret_api_key': config.PINATA_SECRET_API_KEY
         }
       });
       console.log(res)
@@ -87,7 +87,7 @@ export default function MintForm({ getCount }) {
       const res2 = await axios.put(hashMetaUrl, metaData2, {
         headers: {
           'pinata_api_key': config.PINATA_API_KEY,
-          'pinata_secret_api_key': config.PINATA_API_SECRET_KEY
+          'pinata_secret_api_key': config.PINATA_SECRET_API_KEY
         }
       });
       console.log(res2);
