@@ -29,24 +29,22 @@ export default function Home() {
   }, []);
   
   return (
-    <div className="bg-gradient-to-tr from-black to-[#411b87] min-h-screen">
-      <div className="container p-10 min-w-full">
-        <Header />
-        <WalletBalance />
-        <MintForm getCount={getCount} />
-        {totalMinted > 0 && 
-          <p className="text-white text-2xl font-semibold text-center mt-14">
-            You've already minted 
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500"> {totalMinted} artwork(s)!</span>
-          </p>
-        }
-        <div className="flex flex-wrap justify-center my-5 gap-y-8 gap-x-5 mx-auto w-full">
-          {Array(totalMinted).fill(0).map((_, i) => (
-            <div key={i}>
-              <NFT tokenId={i} />
-            </div>
-          ))}
-        </div>
+    <div className="container p-10 min-w-full">
+      <Header />
+      <WalletBalance />
+      <MintForm getCount={getCount} />
+      {totalMinted > 0 && 
+        <p className="text-white text-2xl font-semibold text-center mt-14">
+          You've already minted 
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-violet-500"> {totalMinted} artwork(s)!</span>
+        </p>
+      }
+      <div className="flex flex-wrap justify-center my-5 gap-y-8 gap-x-5 mx-auto w-full">
+        {Array(totalMinted).fill(0).map((_, i) => (
+          <div key={i}>
+            <NFT tokenId={i} />
+          </div>
+        ))}
       </div>
     </div>
   )
