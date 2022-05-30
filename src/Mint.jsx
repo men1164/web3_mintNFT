@@ -15,12 +15,11 @@ const signer = provider.getSigner();
 // get the smart contract
 const contract = new ethers.Contract(config.DEPLOYED_CONTRACT_ADDRESS, MyNFT.abi, signer);
 
-export default function Home() {
+export default function Mint() {
   const [totalMinted, setTotalMinted] = useState(0);
 
   const getCount = async () => {
     const count = await contract.count();
-    console.log("fire getCount");
     setTotalMinted(parseInt(count));
   }
 

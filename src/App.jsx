@@ -1,4 +1,4 @@
-import Home from "./Home"
+import Mint from "./Mint"
 import Install from "./components/Install"
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
@@ -12,7 +12,7 @@ function App() {
           <Navbar />
           <Routes>
             <Route path="/" element={ <Navigate to="/mint" />} />
-            <Route path="/mint" element={ <Home /> } />
+            <Route path="/mint" element={ <Mint /> } />
             <Route path="/transfer" element={ <Transfer /> } />
           </Routes>
         </BrowserRouter>

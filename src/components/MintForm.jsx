@@ -35,7 +35,6 @@ export default function MintForm({ getCount }) {
       setFileError(null);
     }
     else {
-      console.log("fail")
       setFile(null)
       setFileError('Please selected an image file (PNG or JPG)')
     }
